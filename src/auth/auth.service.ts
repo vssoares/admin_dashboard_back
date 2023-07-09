@@ -12,9 +12,9 @@ export class AuthService {
    async login({ email, password }: LoginAuthDto) {
       const user = await this.db.user.findUnique({ where: { email } });
       if (!user) throw new NotFoundError('Usuário não encontrado');
+      const isPasswordValid = await bcrypt.compare(password, user.password);
 
-      if (!bcrypt.compare(password, user.password))
-         throw new UnauthorizedException('Senha incorreta');
+      if (!isPasswordValid) throw new UnauthorizedException('Senha incorreta');
 
       const payload = { sub: user?.id, nome: user?.name, email: user?.email };
 
