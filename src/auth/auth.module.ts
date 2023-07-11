@@ -14,6 +14,7 @@ import { jwtConstants } from './user/constants';
          secret: jwtConstants.secret,
          signOptions: { expiresIn: '1d' },
       }),
+      UserModule,
    ],
    controllers: [AuthController],
    providers: [AuthService, PrismaService],

@@ -41,4 +41,9 @@ export class UserService {
       const { password, ...rest } = user;
       return rest;
    }
+
+   async findAccount(id: number) {
+      const account = await this.db.account.findUnique({ where: { id } });
+      return { ...account, statusCode: 200 };
+   }
 }
