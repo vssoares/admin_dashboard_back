@@ -1,12 +1,13 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AccountService } from './account.service';
+import { UserService } from 'src/auth/user/user.service';
 
 @Controller('account')
 export class AccountController {
-   constructor(private readonly accountService: AccountService) {}
+   constructor(private accountService: AccountService) {}
 
-   @Get()
-   getHello(): string {
-      return this.accountService.getHello();
+   @Get(':id')
+   findAccount(@Param('id') id: string) {
+      return this.accountService.findAccount(+id);
    }
 }

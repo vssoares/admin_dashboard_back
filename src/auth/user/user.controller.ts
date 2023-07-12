@@ -22,9 +22,4 @@ export class UserController {
    findOne(@Param('id') id: string) {
       return this.userService.findOne(+id);
    }
-
-   @Get('conta/:id')
-   findAccount(@Param('id') id: string) {
-      return this.userService.findAccount(+id);
-   }
 }
