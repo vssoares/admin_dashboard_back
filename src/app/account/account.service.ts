@@ -6,10 +6,12 @@ export class AccountService {
    constructor(private db: PrismaService) {}
 
    async findAccount(id: number) {
-      const account = await this.db.account.findUnique({
-         where: { id },
-         include: { transactions: true, investiments: true },
+      const accounts = await this.db.account.findMany({
+         where: {
+            userId: id,
+         },
       });
-      return { ...account, statusCode: 200 };
+
+      return { accounts };
    }
 }

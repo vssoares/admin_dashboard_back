@@ -1,13 +1,14 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Query } from '@nestjs/common';
 import { AccountService } from './account.service';
-import { UserService } from 'src/auth/user/user.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('account')
+@ApiTags('Account')
 export class AccountController {
    constructor(private accountService: AccountService) {}
 
-   @Get(':id')
-   findAccount(@Param('id') id: string) {
+   @Get('')
+   findAccount(@Query('id') id: string) {
       return this.accountService.findAccount(+id);
    }
 }
